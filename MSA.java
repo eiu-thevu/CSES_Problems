@@ -12,6 +12,32 @@ public class MSA {
 			numbers[i] = nl();
 		}
 
+//		prefixSum(numbers, n);
+		twoPointers(numbers, n);
+	}
+
+	static void twoPointers(long numbers[], int n) {
+		int i = 0;
+		int j = 0;
+
+		long sum = 0;
+		long maxSum = Integer.MIN_VALUE;
+
+		for (; j < n; j++) {
+			sum += numbers[j];
+
+			if (i < j && (sum < 0 || numbers[i] < 0)) {
+				sum = numbers[j];
+				i = j;
+			}
+			
+			maxSum = Math.max(maxSum, sum);
+		}
+		
+		System.out.println(maxSum);
+	}
+
+	static void prefixSum(long numbers[], int n) {
 		long prefix[] = new long[n];
 		prefix[0] = numbers[0];
 
@@ -28,7 +54,6 @@ public class MSA {
 		}
 
 		System.out.println(answer);
-
 	}
 
 	static InputStream is = System.in;
